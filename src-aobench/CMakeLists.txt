@@ -1,0 +1,8 @@
+file(MAKE_DIRECTORY src-${PROGRAM})
+set(CMAKE_CXX_COMPILER "dpcpp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsycl -std=c++11 -O2 -cl-opt-disable")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -ltbb -lOpenCL -lsycl")
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin CACHE PATH "Build directory" FORCE)
+include_directories(${CMAKE_SOURCE_DIR}/include)
+add_executable (${PROGRAM} ${PROGRAM}.cpp)
+set_target_properties(${PROGRAM} PROPERTIES LINKER_LANGUAGE CXX)
